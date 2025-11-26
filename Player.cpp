@@ -2,7 +2,7 @@
 #include <iostream>
 
 Player::Player(const std::string& name) : m_name(name), m_balance(0.0) {
-
+    
 }
 
 double Player::getBalance() {

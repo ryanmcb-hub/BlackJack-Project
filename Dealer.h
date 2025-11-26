@@ -6,7 +6,8 @@ class Dealer : public Player {
 public:
     Dealer() : Player("Dealer") {}
 
-    void showPartialHand() const;
+    void showCard() const;
+    
 };
 
 

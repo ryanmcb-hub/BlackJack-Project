@@ -5,14 +5,17 @@
 #include "Card.h"
 
 class Player {
+protected:
+    std::vector<Card> m_hand; 
+
 private:
     double m_balance;
-    std::vector<Card> m_hand;
     std::string m_name;
 
 public:
     Player(const std::string& name);
-
+    virtual ~Player();
+    
     double getBalance(); //ideally retrive this from a text file
     void clearBalance(); //wipes out balance after game over
 
