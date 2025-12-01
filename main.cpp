@@ -2,6 +2,7 @@
 #include "Card.h"
 #include "Deck.h"
 #include "Shoe.h"
+#include "CardGame.h"
 
 int main() {
     std::cout << "--- Test ---" << std::endl;
@@ -54,6 +55,7 @@ int main() {
     std::cout << "2-deck shoe: " << shoe2.cardsRemaining() << " cards" << std::endl;
     std::cout << "6-deck shoe: " << shoe6.cardsRemaining() << " cards" << std::endl;
     std::cout << "8-deck shoe: " << shoe8.cardsRemaining() << " cards" << std::endl;
+
 
     std::cout << "\n--- done ---" << std::endl;
 

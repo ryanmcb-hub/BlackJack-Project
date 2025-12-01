@@ -9,4 +9,6 @@ add_executable(BlackJackTest main.cpp
         Deck.cpp
         Deck.h
         Shoe.cpp
-        Shoe.h)
+        Shoe.h
+        CardGame.cpp
+        CardGame.h)
