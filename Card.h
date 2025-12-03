@@ -1,29 +1,30 @@
-
-#ifndef BLACKJACKTEST_CARD_H
-#define BLACKJACKTEST_CARD_H
+#ifndef MA3_CARD_H
+#define MA3_CARD_H
 
 #include <string>
+#include <iostream>
 
 class Card {
 private:
-    std::string m_suit; // Hearts, Diamonds, Clubs, Spades
-    std::string m_rank;  // Ace, 2–10, Jack, Queen, King
-    int m_value; // Blackjack value (Ace=11 unless changed later)
+    std::string m_suit;
+    std::string m_rank;
+    int m_value;
 
 public:
-    Card(); //constructor
-    Card(const std::string& suit, const std::string& rank, int value);
+    Card();
+    Card(const std::string &suit, const std::string &rank, const int &value);
 
-    //getters
-    std::string getSuit() const;
     std::string getRank() const;
+    std::string getSuit() const;
     int getValue() const;
-
-    // Used if the game later changes Ace from 11 to 1
     void setValue(int value);
+    std::string getCard() const;
 
+    // Operator Overloading
+    bool operator==(const Card& other) const;
 
-    std::string getCard() const; // Should be "Rank of Suit"
+    // Friend function
+    friend std::ostream& operator<<(std::ostream& os, const Card& card);
 };
 
-#endif
+#endif // MA3_CARD_H
