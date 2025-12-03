@@ -16,9 +16,13 @@ std::string Card::getRank() const {
         return m_rank; 
 }
 
-int Card::getValue() const { return m_value; }
+int Card::getValue() const { 
+        return m_value;
+}
 
-void Card::setValue(int value) { m_value = value; }
+void Card::setValue(int value) {
+        m_value = value; 
+}
 
 // card display (EX:"9 of Diamonds")
 std::string Card::getCard() const {
