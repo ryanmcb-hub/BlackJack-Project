@@ -2,12 +2,16 @@
 #include "Player.h"
 #include <iostream>
 
+using namespace std;
+
+// Dealer::Dealer() : Player::Player("Dealer") {}
+
 void Dealer::showCard() const {
     if (m_hand.empty()) {
-        std::cout << "Dealer has no cards." << std::endl;
+        cout << "Dealer has no cards." << endl;
         return;
     }
 
     const Card& card = m_hand.front();
-    std::cout << "Dealer's visible card: " << card.getRank() << " of " << card.getSuit() << std::endl;
+    cout << "Dealer's visible card: " << card.getRank() << " of " << card.getSuit() << endl;
 }

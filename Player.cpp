@@ -5,6 +5,10 @@ Player::Player(const std::string& name) : m_name(name), m_balance(0.0) {
     
 }
 
+Player::~Player() {
+
+}
+
 double Player::getBalance() {
     return m_balance;
 }

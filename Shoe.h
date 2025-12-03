@@ -12,17 +12,18 @@ private:
     int numDecks;
     std::vector<Deck> decks;         // All decks
     std::vector<Card> shoeCards;     // All cards from all decks merged
-    int nextCardIndex;               // Dealing pointer
+    int nextShoeIndex;               // Dealing pointer
 
 public:
-    Shoe(int numDecks = 4); // Default = 4-deck shoe Maybe add something that can change this later?
+    Shoe();
+    Shoe(int numDecks); // Default = 4-deck shoe Maybe add something that can change this later?
 
-    void buildShoe();
-    void shuffle(); // Shuffle cards together
+    void buildShoe(int numDecks);
+    void shuffleShoe(); // Shuffle cards together
     Card dealCard(); // Deal from shoe
 
-    int cardsRemaining() const;
-    int decksInShoe() const { return numDecks; }
+    int cardsRemaining();
+    int decksInShoe();
 };
 
 #endif
