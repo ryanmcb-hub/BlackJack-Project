@@ -4,25 +4,31 @@
 #include <vector>
 #include "Deck.h"
 
+using namespace std;
+
 // Shoe = multiple decks combined into one pile.
-// According from looking online Blackjack commonly uses 2, 4, 6, or 8 decks.
 
 class Shoe {
 private:
     int numDecks;
-    std::vector<Deck> decks;         // All decks
-    std::vector<Card> shoeCards;     // All cards from all decks merged
-    int nextCardIndex;               // Dealing pointer
+    vector<Deck> decks;         
+    vector<Card> shoeCards;
+    int startingCardCount;     
+    int cutCard;   
+    bool final = false;           
 
 public:
-    Shoe(int numDecks = 4); // Default = 4-deck shoe Maybe add something that can change this later?
+    Shoe();
+    Shoe(int numDecks); 
 
-    void buildShoe();
-    void shuffle(); // Shuffle cards together
-    Card dealCard(); // Deal from shoe
+    void buildShoe(int numDecks);
+    void setCutCard();
+    int getCutCard();
+    void shuffleShoe(); 
+    Card dealCard();
 
-    int cardsRemaining() const;
-    int decksInShoe() const { return numDecks; }
+    int cardsRemaining();
+    int decksInShoe();
 };
 
 #endif

@@ -1,29 +1,40 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <vector>
-#include "Card.h"
+#include "Hand.h"
 
+#include <vector>
+
+using namespace std;
 class Player {
 protected:
-    std::vector<Card> m_hand; 
+    Hand m_hand = Hand(); 
 
 private:
-    double m_balance;
-    std::string m_name;
+    double m_balance = 250;
+    string m_name;
+    int m_currentBet = 0;
 
 public:
-    Player(const std::string& name);
+    Player();
+    Player(string name);
     virtual ~Player();
-    
-    double getBalance(); //ideally retrive this from a text file
-    void clearBalance(); //wipes out balance after game over
 
-    void addCard(const Card& card); //add card to hand vector
-    int getHand() const; 
-    void showHandValue() const; //calculate and show hand value
-    void clearHand(); //should be obvious :)
+    double getBalance();
+    string getName();
 
+    void setBet(double bet);
+    int getBet();
+
+    virtual Hand& getHand();
+
+    void printBalance();
+    void printName();
+
+    bool isBusted();
+
+    void operator+=(double winnings);
+    void operator-=(double bet);
 };
 
 #endif
