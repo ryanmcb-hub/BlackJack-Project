@@ -24,6 +24,7 @@ public:
     int getPoints();
 
     bool isBlackjack();
+    bool isSoft();
 
     int cardCount();
 

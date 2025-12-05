@@ -25,7 +25,7 @@ public:
     void playGame() override;
     void dealHands() override;
 
-    vector<int> checkBlackjacks();
+    vector<Player*> checkBlackjacks(vector<Player*>* winners, vector<Player*>* losers);
 };
 
 #endif

@@ -60,6 +60,16 @@ bool Hand::isBlackjack() {
     }
 }
 
+bool Hand::isSoft() {
+    for (int i = 0; i < m_hand.size(); i++){
+        if (m_hand[i].getValue() == 11){
+            return true;
+        }
+    }
+
+    return false;
+}
+
 ostream& operator<<(ostream& os, Hand& hand) {
     for (int i = 0; i< hand.cardCount(); i++) {
         Card card = hand.getCard(i);
