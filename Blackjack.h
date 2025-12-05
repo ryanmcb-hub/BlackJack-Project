@@ -1,23 +1,31 @@
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
 
-#include <vector>
+#include "CardGame.h"
 #include "Card.h"
 #include "Shoe.h"
 #include "Player.h"
 #include "Dealer.h"
 
+#include <vector>
+
 using namespace std;
 
-class Blackjack {
+class Blackjack : public CardGame {
 private:
     Dealer m_dealer;
-    vector<Player> m_players;
     Shoe m_shoe;
+    int m_cutCard;
 
 public:
-    Blackjack(int players);
-    void playGame();
+    Blackjack(string name);
+    Blackjack(string name, int decks);
+    Blackjack(string name, int decks, int players);
+
+    void playGame() override;
+    void dealHands() override;
+
+    vector<int> checkBlackjacks();
 };
 
 #endif

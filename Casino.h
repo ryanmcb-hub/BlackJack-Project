@@ -13,6 +13,10 @@ class Casino {
 public:
     Casino();
     void openCasino();
+
+    void displayWelcome(int& selectedGame);
+    void displayExit();
+    int gameMenu();
 };
 
 #endif

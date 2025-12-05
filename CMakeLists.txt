@@ -21,4 +21,10 @@ add_executable(Blackjack_Project
     Blackjack.cpp
     CardGame.cpp
     CardGame.h
+    Slots.h
+    Slots.cpp
+    Game.h
+    Game.cpp
+    Hand.h
+    Hand.cpp
 )

@@ -2,15 +2,17 @@
 #include <algorithm>
 #include <random>
 
+using namespace std;
+
 // 52-card deck
-Deck::Deck() : nextCardIndex(0) { //Starts with the top card index at 0.
-    static std::vector<std::string> suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
-    static std::vector<std::string> ranks = {
+Deck::Deck() { //Starts with the top card index at 0.
+    vector<string> suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
+    vector<string> ranks = {
         "Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"
     };
 
     // Blackjack values corresponding to the rank index
-    static std::vector<int> values = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+    vector<int> values = {11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
 
     // Create all 52 cards by pairing each suit with each rank
     for (const auto& s : suits)
@@ -19,22 +21,24 @@ Deck::Deck() : nextCardIndex(0) { //Starts with the top card index at 0.
 }
 
 // Shuffle the deck using Mersenne Twister
-void Deck::shuffle() {
-    std::random_device rd;
-    std::mt19937 rng(rd());
-    std::shuffle(m_cards.begin(), m_cards.end(), rng);
-    nextCardIndex = 0;
+void Deck::shuffleDeck() {
+    random_device rd;
+    mt19937 rng(rd());
+    shuffle(m_cards.begin(), m_cards.end(), rng);
 }
 
 // Deal one card and move the index forward
 Card Deck::dealCard() {
-    return m_cards[nextCardIndex++];
+    Card top = m_cards.back();
+    m_cards.pop_back();
+
+    return top;
 }
 
-int Deck::cardsRemaining() const {
-    return m_cards.size() - nextCardIndex;
+int Deck::cardsRemaining() {
+    return m_cards.size();
 }
 
-const std::vector<Card>& Deck::getCards() const {
+vector<Card>& Deck::getCards() {
     return m_cards;
 }

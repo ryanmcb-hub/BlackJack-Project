@@ -4,14 +4,13 @@
 
 using namespace std;
 
-// Dealer::Dealer() : Player::Player("Dealer") {}
+Dealer::Dealer() : Player("Dealer") {}
 
-void Dealer::showCard() const {
-    if (m_hand.empty()) {
+void Dealer::showUpCard() {
+    if (m_hand.cardCount() == 0) {
         cout << "Dealer has no cards." << endl;
         return;
     }
 
-    const Card& card = m_hand.front();
-    cout << "Dealer's visible card: " << card.getRank() << " of " << card.getSuit() << endl;
+    cout << "Dealer's visible card: " <<endl<< m_hand.getCard(0) << endl <<endl;
 }

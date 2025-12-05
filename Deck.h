@@ -4,20 +4,21 @@
 #include <vector>
 #include "Card.h"
 
+using namespace std;
+
 // Deck = A standard set of 52 cards.
 class Deck {
 private:
-    std::vector<Card> m_cards; // 52 cards
-    int nextCardIndex; //card to deal
+    vector<Card> m_cards; // 52 cards
 
 public:
     Deck();
-    void shuffle(); // Randomize
+    void shuffleDeck(); // Randomize
     Card dealCard(); // Deal one
-    int cardsRemaining() const;
+    int cardsRemaining();
 
     // Shoe needs access to the full deck
-    const std::vector<Card>& getCards() const; // for shoe to read cards
+    vector<Card>& getCards(); // for shoe to read cards
 };
 
 #endif

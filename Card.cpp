@@ -1,5 +1,7 @@
 #include "Card.h"
 
+using namespace std;
+
 // Default constructor
 Card::Card() {
     m_rank = "";
@@ -8,22 +10,22 @@ Card::Card() {
 }
 
 // Parameter constructor
-Card::Card(const std::string &suit, const std::string &rank, const int &value) {
+Card::Card(const string &suit, const string &rank, const int &value) {
     m_suit = suit;
     m_rank = rank;
     m_value = value;
 }
 
 // Getters
-std::string Card::getRank() const {
+string Card::getRank() {
     return m_rank;
 }
 
-std::string Card::getSuit() const {
+string Card::getSuit() {
     return m_suit;
 }
 
-int Card::getValue() const {
+int Card::getValue() {
     return m_value;
 }
 
@@ -33,9 +35,9 @@ void Card::setValue(int value) {
 }
 
 // Returns text like "Ace of Hearts"
-std::string Card::getCard() const {
-    return m_rank + " of " + m_suit;
-}
+// string Card::showCard() const {
+//     return m_rank + " of " + m_suit;
+// }
 
 // Operator Overloading
 bool Card::operator==(const Card& other) const {
@@ -43,7 +45,7 @@ bool Card::operator==(const Card& other) const {
 }
 
 // Friend function
-std::ostream& operator<<(std::ostream& os, const Card& card) {
+ostream& operator<<(ostream& os, const Card& card) {
     os << card.m_rank << " of " << card.m_suit;
     return os;
 }

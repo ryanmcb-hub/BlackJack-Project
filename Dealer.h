@@ -4,14 +4,9 @@
 
 class Dealer : public Player {
 public:
-    Dealer() : Player("Dealer") {}
+    Dealer();
 
-    void showCard() const;
-    
+    void showUpCard();    
 };
-
-
-
-
 
 #endif
