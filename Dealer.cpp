@@ -12,5 +12,5 @@ void Dealer::showUpCard() {
         return;
     }
 
-    cout << "Dealer's visible card: " <<endl<< m_hand.getCard(0) << endl <<endl;
+    cout << "Dealer's visible card: " << endl << m_hand.getCard(0) << endl <<endl;
 }
