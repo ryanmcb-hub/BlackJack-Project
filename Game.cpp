@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <iostream>
 #include <string>
+#include <limits>
 
 using namespace std;
 
@@ -9,7 +10,7 @@ Game::Game(string name) {
 
     int players;
     do {
-        cout<<endl<<"How Many Players: ";
+        cout << endl << "How Many Players: ";
         cin >> players;
 
         if (cin.fail() || players < 1) {
@@ -31,7 +32,7 @@ Game::Game(string name, int numPlayers) {
     m_playerCount = numPlayers;
 
     if (m_playerCount == 1) {
-        cout<<endl<<"Single Player Only Game"<<endl;
+        cout << endl << "Single Player Only Game" << endl;
 
         if (name == "The Game"){
             m_players.push_back(Player("User"));
@@ -46,9 +47,9 @@ Game::Game(string name, int numPlayers) {
 }
 
 void Game::playGame(){
-    cout<<endl<<"Congrats "<<m_players[0].getName()<<" You Have Lost 'The Game'"<<endl;
+    cout << endl << "Congrats " << m_players[0].getName() << " You Have Lost 'The Game'"<<endl;
 };
 
 void Game::printGameTitle() {
-    cout<<"#  You Have Joined The "<<m_gameName<<"  #"<<endl;
+    cout << "#  You Have Joined The " << m_gameName << "  #" << endl;
 }
