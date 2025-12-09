@@ -5,6 +5,7 @@
 #include "Shoe.h"
 
 #include <vector>
+#include <string>
 
 using namespace std;
 class Player {
@@ -15,6 +16,8 @@ private:
     double m_balance = 250;
     string m_name;
     int m_currentBet = 0;
+    void saveBalance();
+    void loadBalance(const string& name);
 
     double m_winnings = 0;
     double m_losses = 0;

@@ -52,6 +52,28 @@ int Hand::getPoints(){
     return total;
 }
 
+bool Hand::isSoft17() {
+    int total = 0;
+    int aceCount = 0;
+
+    for (Card& cd : m_hand) {
+        if (cd.getRank() == "Ace") {
+            total += 11;
+            aceCount++;
+        } else {
+            total += cd.getValue();
+        }
+    }
+
+    // reduce aces from 11 to 1
+    while (total > 21 && aceCount > 0) {
+        total -= 10;
+        aceCount--;
+    }
+
+    return (total == 17 && aceCount > 0);
+}
+
 bool Hand::isBlackjack() {
     if (cardCount() == 2 && getPoints() == 21) {
         return true;

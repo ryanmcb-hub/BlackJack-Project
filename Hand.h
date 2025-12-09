@@ -23,6 +23,8 @@ public:
 
     int getPoints();
 
+    bool isSoft17();
+
     bool isBlackjack();
     bool isSoft();
 

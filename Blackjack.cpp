@@ -14,8 +14,8 @@ Blackjack::Blackjack(string name) : CardGame(name) {
 
     m_shoe = Shoe(m_numDecks);
 
-    cout<<"Shoe Size: "<<m_shoe.cardsRemaining()<<endl;
-    cout<<"Cut Card: "<<m_shoe.getCutCard()<<endl;
+    cout << "Shoe Size: " << m_shoe.cardsRemaining() << endl;
+    cout << "Cut Card: " << m_shoe.getCutCard() << endl;
 }
 
 Blackjack::Blackjack(string name, int decks) : CardGame(name, decks) {
@@ -72,12 +72,11 @@ void Blackjack::playGame() {
 
     do
     {
-        cout<<endl;
-        cout<<"#######################################################"<<endl;
+        cout << endl;
+        cout << "#######################################################" << endl;
         printGameTitle();
-        cout<<"#######################################################"<<endl;
-        cout<<endl;
-
+        cout << "#######################################################" << endl;
+        cout << endl;
         do
         {
             // Get Bets
@@ -87,7 +86,7 @@ void Blackjack::playGame() {
                 int bet;
                 do
                 {
-                    cout<<m_players[p].getName()<<" Place A Bet (Balance: $"<<m_players[p].getBalance()<<"): $";
+                    cout << m_players[p].getName() << " Place A Bet (Balance: $" << m_players[p].getBalance() << "): $";
                     cin >> bet;
 
                     if (cin.fail() || bet < 25 || bet > m_players[p].getBalance())
@@ -106,10 +105,9 @@ void Blackjack::playGame() {
                 m_players[p].setBet(bet);
             }
 
-            cout<<endl<<"Betting Is Closed!"<<endl<<endl;
+            cout << endl << "Betting Is Closed!" << endl << endl;
 
-            // Deal Hands
-
+            m_dealer.getHand().clearHand();
             dealHands();
 
             vector<Player*> wins;
@@ -117,6 +115,8 @@ void Blackjack::playGame() {
             vector<Player*> pushes;
 
             vector<Player*> continuingPlayerIndexs = checkBlackjacks(&wins, &loses);
+
+            vector<int> standingPlayers;
 
             for (int c = 0; c < continuingPlayerIndexs.size(); c++) {
                 continuingPlayerIndexs[c] -> takeTurn(m_dealer.getUpCard(), &m_shoe);
@@ -163,7 +163,7 @@ void Blackjack::playGame() {
                 }
             }
             
-            cout<<endl<<"Play Again? (y/n): ";
+            cout << endl << "Play Again? (y/n): ";
             cin >> again;
 
             again = tolower(again);
