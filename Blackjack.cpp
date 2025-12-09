@@ -117,11 +117,12 @@ void Blackjack::playGame() {
 
             cout << endl << "Betting Is Closed!" << endl << endl;
 
-            // Deal Hands
-
+            m_dealer.getHand().clearHand();
             dealHands();
 
             vector<int> continuingPlayerIndexs = checkBlackjacks();
+
+            vector<int> standingPlayers;
 
             for (int c = 0; c < continuingPlayerIndexs.size(); c++) {
                 Player* player = &m_players[continuingPlayerIndexs[c]];
@@ -164,8 +165,36 @@ void Blackjack::playGame() {
 
                     player-> operator-=(player -> getBet());
                 } else {
-                    cout << player->getName() << " Wins Because I Have Not Coded The Dealer!" << endl;
-                    player-> operator+=(player -> getBet());
+                    standingPlayers.push_back(continuingPlayerIndexs[c]);
+                }
+            }
+
+            if (!standingPlayers.empty()) {
+                m_dealer.play(m_shoe);
+
+                int dealerPoints = m_dealer.getHand().getPoints();
+                bool dealerBust = m_dealer.isBusted();
+
+                for (int idx : standingPlayers) {
+                    Player* player = &m_players[idx];
+                    int playerPoints = player->getHand().getPoints();
+                    int bet = player->getBet();
+
+                    cout << endl << player->getName() << " has " << playerPoints << " points. ";
+
+                    if (dealerBust) {
+                        cout << "Dealer busted — " << player->getName() << " wins $" << bet << "!" << endl;
+                        player->operator+=(bet);
+                    } else if (playerPoints > dealerPoints) {
+                        cout << player->getName() << " beats dealer (" << dealerPoints << ") — wins $" << bet << "!" << endl;
+                        player->operator+=(bet);
+                    } else if (playerPoints < dealerPoints) {
+                        cout << player->getName() << " loses to dealer (" << dealerPoints << ") — loses $" << bet << "!" << endl;
+                        player->operator-=(bet);
+                    } else {
+                        cout << player->getName() << " pushes with dealer (" << dealerPoints << ") — push, bet returned." << endl;
+                        // push = no balance change
+                    }
                 }
             }
             
