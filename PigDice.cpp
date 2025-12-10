@@ -107,12 +107,13 @@ void PigDice::displayRules() {
 void PigDice::playGame() {
 	char again;
 	do {
-		if (m_players.size() != 2) {
-			cout << "PigDice betting mode only supports 2 players." << endl;
+		if (m_players.size() < 2) {
+			cout << "PigDice betting mode requires at least 2 players." << endl;
 			return;
 		}
 
-		for (int p = 0; p < 2; ++p) {
+		// Prompt every player for a bet (min $25)
+		for (size_t p = 0; p < m_players.size(); ++p) {
 			int bet;
 			do {
 				cout << m_players[p].getName() << " Place A Bet (Balance: $" << m_players[p].getBalance() << "): $";
@@ -174,28 +175,24 @@ void PigDice::playGame() {
 		int winnerTurns = m_turns[winnerIndex].get_turn_count();
 		int winnerBet = m_players[winnerIndex].getBet();
 
-		int loserIndex = (winnerIndex == 0) ? 1 : 0;
-
 		if (winnerTurns <= winnerBet) {
-			m_players[winnerIndex].win(false);
+			m_players[winnerIndex].operator+=(winnerBet);
 			cout << m_players[winnerIndex].getName() << " met their bet (<= " << winnerBet << " turns) and wins $" << winnerBet << "!" << endl;
-			// losing player still loses their bet
-			m_players[loserIndex].lose();
-			cout << m_players[loserIndex].getName() << " loses their bet of $" << m_players[loserIndex].getBet() << "." << endl;
-			cout << endl;
-			cout << "Thanks for playing!" << endl;
+
+			for (size_t i = 0; i < m_players.size(); ++i) {
+				if ((int)i == winnerIndex) continue;
+				m_players[i].operator-=(m_players[i].getBet());
+				cout << m_players[i].getName() << " loses their bet of $" << m_players[i].getBet() << "." << endl;
+			}
 		} else {
-			// winner failed to meet their own bet, so they lose
-			m_players[winnerIndex].lose();
 			cout << m_players[winnerIndex].getName() << " did not meet their bet (" << winnerBet << ") and loses $" << winnerBet << "." << endl;
-			cout << endl;
-			cout << "Thanks for playing!" << endl;
-			// losing player still loses their bet as they did not win
-			m_players[loserIndex].lose();
-			cout << m_players[loserIndex].getName() << " also loses their bet of $" << m_players[loserIndex].getBet() << "." << endl;
-			cout << endl;
-			cout << "Thanks for playing!" << endl;
+			for (size_t i = 0; i < m_players.size(); ++i) {
+				m_players[i].operator-=(m_players[i].getBet());
+				cout << m_players[i].getName() << " loses their bet of $" << m_players[i].getBet() << "." << endl;
+			}
 		}
+
+		cout << endl << "Thanks for playing!" << endl;
 
 		do{
 			cout << endl << "Play Again? (y/n): ";
