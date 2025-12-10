@@ -22,7 +22,7 @@ Blackjack::Blackjack(string name, int decks) : CardGame(name, decks) {
     m_shoe = Shoe(m_numDecks);
 }
 
-Blackjack::Blackjack(string name, int decks, int numPlayers) : CardGame(name, numPlayers, decks) {
+Blackjack::Blackjack(string name, int decks, int players) : CardGame(name, decks, players) {
     m_shoe = Shoe(m_numDecks);
 }
 
@@ -67,16 +67,19 @@ vector<Player*> Blackjack::checkBlackjacks(vector<Player*>* winners, vector<Play
 
 }
 
+void Blackjack::displayRules() {
+    cout << endl;
+    cout << "#######################################################" << endl;
+    printGameTitle();
+    cout << "#######################################################" << endl;
+    cout << endl;
+}
+
 void Blackjack::playGame() {
     char again;
 
     do
     {
-        cout << endl;
-        cout << "#######################################################" << endl;
-        printGameTitle();
-        cout << "#######################################################" << endl;
-        cout << endl;
         do
         {
             // Get Bets
@@ -150,15 +153,15 @@ void Blackjack::playGame() {
                     bool push = find(pushes.begin(), pushes.end(), player) != pushes.end();
 
                     if (won) {
-                        cout<<player -> getName()<<" Won $" << player -> getWinnings()<<endl;
+                        cout << player -> getName()<<" Won $" << player -> getWinnings() << endl;
                     } else if (lost) {
                         player -> lose();
 
-                        cout<<player -> getName()<<" Lost $" << player -> getLosses()<<endl;
+                        cout << player -> getName()<<" Lost $" << player -> getLosses() << endl;
                     } else if (push) {
                         cout << player -> getName() <<" Pushed" << endl;
                     } else {
-                        cout<<player -> getName()<<" Broke The Game! Congrats!"<<endl;
+                        cout << player -> getName()<<" Broke The Game! Congrats!" << endl;
                     }
                 }
             }

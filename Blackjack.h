@@ -24,6 +24,7 @@ public:
 
     void playGame() override;
     void dealHands() override;
+    void displayRules() override;
 
     vector<Player*> checkBlackjacks(vector<Player*>* winners, vector<Player*>* losers);
 };

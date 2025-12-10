@@ -18,6 +18,7 @@ public:
     Game(string name, int numPlayers);
 
     void virtual playGame();
+    void virtual displayRules();
     void printGameTitle();
 };
 

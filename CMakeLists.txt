@@ -26,4 +26,12 @@ add_executable(Blackjack_Project
     Game.cpp
     Hand.h
     Hand.cpp
+    PigDice.h
+    PigDice.cpp
+    BullCow.h
+    BullCow.cpp
+    Die.h
+    Die.cpp
+    DiceGame.h
+    DiceGame.cpp
 )

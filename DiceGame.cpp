@@ -14,3 +14,8 @@ DiceGame::DiceGame(string name, int dice, int players) : Game(name, players) {
 void DiceGame::playGame() {
 
 };
+
+void DiceGame::displayRules() {
+    cout << "This is a default Dice Game" << endl;
+    cout << "You should not be here" << endl << endl;
+}

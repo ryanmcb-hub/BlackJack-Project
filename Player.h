@@ -10,7 +10,8 @@
 using namespace std;
 class Player {
 protected:
-    Hand m_hand = Hand(); 
+    Hand m_hand = Hand();
+    int m_score = 0;
 
 private:
     double m_balance = 250;
@@ -37,6 +38,8 @@ public:
     virtual Hand& getHand();
 
     int getScore();
+    void setScore(int score);
+    int getPoints();
 
     void printBalance();
     void printName();

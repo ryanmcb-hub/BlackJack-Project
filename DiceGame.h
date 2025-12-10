@@ -6,8 +6,7 @@
 
 using namespace std;
 class DiceGame : public Game {
-protected:
-    int m_numDecks;        
+protected:   
 
 public:
     DiceGame(string name);
@@ -15,6 +14,7 @@ public:
     DiceGame(string name, int dice, int players);
 
     void playGame() override;
+    void displayRules() override;
 };
 
 #endif 

@@ -50,6 +50,10 @@ void Game::playGame(){
     cout << endl << "Congrats " << m_players[0].getName() << " You Have Lost 'The Game'"<<endl;
 };
 
+void Game::displayRules() {
+    cout << "This is The Game" << endl << endl;
+}
+
 void Game::printGameTitle() {
     cout << "#  You Have Joined The " << m_gameName << "  #" << endl;
 }

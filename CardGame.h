@@ -16,6 +16,7 @@ public:
     CardGame(string name, int decks, int players);
 
     void playGame() override;
+    void displayRules() override;
     void virtual dealHands();
 };
 

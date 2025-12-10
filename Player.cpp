@@ -61,6 +61,9 @@ bool Player::isBusted() {
 }
 
 void Player::win(bool blackjack) {
+    m_winnings = 0;
+    m_losses = 0;
+
     if (blackjack) {
         m_winnings += m_currentBet * 1.5;
     } else {
@@ -68,12 +71,18 @@ void Player::win(bool blackjack) {
     }
 
     m_balance += m_winnings;
+    
+    saveBalance();
 }
 
 void Player::lose() {
-    m_losses -= m_currentBet;
-    
+    m_winnings = 0;
+    m_losses = 0;
+
+    m_losses += m_currentBet;
     m_balance -= m_losses;
+
+    saveBalance();
 }
 
 void Player::takeTurn(Card dealerUpCard, Shoe* shoe) {
@@ -125,6 +134,14 @@ void Player::takeTurn(Card dealerUpCard, Shoe* shoe) {
 }
 
 int Player::getScore() {
+    return m_score;
+}
+
+void Player::setScore(int points) {
+    m_score = points;
+}
+
+int Player::getPoints() {
     return m_hand.getPoints();
 }
 
