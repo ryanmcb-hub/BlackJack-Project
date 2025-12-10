@@ -32,11 +32,11 @@ Game::Game(string name, int numPlayers) {
     m_playerCount = numPlayers;
 
     if (m_playerCount == 1) {
-        cout << endl << "Single Player Only Game" << endl;
-
         if (name == "The Game"){
             m_players.push_back(Player("User"));
         } else {
+            cout << endl << "Single Player Only Game" << endl;
+
             m_players.push_back(Player());
         }
     } else {
