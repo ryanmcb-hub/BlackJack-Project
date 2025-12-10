@@ -146,7 +146,8 @@ void BullCow::playGame() {
             m_gameOver = m_results.bulls == 4 || m_guess.getGuessCount() >= 15;
         } while (!m_gameOver);
 
-        cout << "Test: "<<m_results.bulls<<" Bulls , "<<m_results.cows<<" Cows."<<endl;
+        //not needed
+        //cout << "Test: " << m_results.bulls << " Bulls , " << m_results.cows << " Cows."<<endl;
 
         if (m_results.bulls == 4){
             m_players[0].win(false);

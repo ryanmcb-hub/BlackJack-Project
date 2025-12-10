@@ -1,4 +1,5 @@
 #include "PigDice.h"
+#include <limits>
 
 using namespace std;
 
@@ -106,10 +107,39 @@ void PigDice::displayRules() {
 void PigDice::playGame() {
 	char again;
 	do {
-		do
-		{
-			for (int i = 0; i < m_players.size(); i++)
-			{
+		if (m_players.size() != 2) {
+			cout << "PigDice betting mode only supports 2 players." << endl;
+			return;
+		}
+
+		for (int p = 0; p < 2; ++p) {
+			int bet;
+			do {
+				cout << m_players[p].getName() << " Place A Bet (Balance: $" << m_players[p].getBalance() << "): $";
+				cin >> bet;
+
+				if (cin.fail() || bet < 25 || bet > m_players[p].getBalance()) {
+					if (!cin.fail() && bet > m_players[p].getBalance()) {
+						cout << "Bet Too High. Be Less Broke!" << endl;
+					} else {
+						cout << "Bet Must Be A Whole Number Greater Than $25" << endl;
+					}
+
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				}
+			} while (cin.fail() || bet < 25 || bet > m_players[p].getBalance());
+
+			m_players[p].setBet(bet);
+		}
+
+		for (int i = 0; i < m_players.size(); i++) {
+			m_players[i].setScore(0);
+			m_turns[i] = PigDiceTurn();
+		}
+
+		do {
+			for (int i = 0; i < m_players.size(); i++) {
 				m_turns[i].set_turn_count();
 				cout << m_players[i].getName() << " (Score:"<< m_players[i].getScore() << ") - TURN " << m_turns[i].get_turn_count() << endl;
 
@@ -123,13 +153,11 @@ void PigDice::playGame() {
 				m_turns[i].reset_turn_over();
 			}
 
-			bool checkScore = any_of(m_players.begin(), m_players.end(), [](Player n)
-			{
+			bool checkScore = any_of(m_players.begin(), m_players.end(), [](Player n) {
 				return n.getScore() >= 25;
 			});
 
-			if (checkScore)
-			{
+			if (checkScore) {
 				set_over();
 			}
 		} while (!m_gameOver);
@@ -140,9 +168,34 @@ void PigDice::playGame() {
 
 		int winnerIndex = distance(m_players.begin(), highScore);
 
-		cout<<"Congratulations "<<m_players[winnerIndex].getName()<<", you're the winner!"<<endl;
-		cout<<"You had a final score of "<<m_players[winnerIndex].getScore()<<" points after "<<m_turns[winnerIndex].get_turn_count()<<" turns!"<<endl<<endl;
-		cout<<"THANKS FOR PLAYING!" << endl;
+		//cout << m_players[winnerIndex].getName() << " won!!" << endl;
+		cout << m_players[winnerIndex].getName() << " had a final score of " << m_players[winnerIndex].getScore() << " points after " << m_turns[winnerIndex].get_turn_count() << " turns!" << endl<<endl;
+
+		int winnerTurns = m_turns[winnerIndex].get_turn_count();
+		int winnerBet = m_players[winnerIndex].getBet();
+
+		int loserIndex = (winnerIndex == 0) ? 1 : 0;
+
+		if (winnerTurns <= winnerBet) {
+			m_players[winnerIndex].win(false);
+			cout << m_players[winnerIndex].getName() << " met their bet (<= " << winnerBet << " turns) and wins $" << winnerBet << "!" << endl;
+			// losing player still loses their bet
+			m_players[loserIndex].lose();
+			cout << m_players[loserIndex].getName() << " loses their bet of $" << m_players[loserIndex].getBet() << "." << endl;
+			cout << endl;
+			cout << "Thanks for playing!" << endl;
+		} else {
+			// winner failed to meet their own bet, so they lose
+			m_players[winnerIndex].lose();
+			cout << m_players[winnerIndex].getName() << " did not meet their bet (" << winnerBet << ") and loses $" << winnerBet << "." << endl;
+			cout << endl;
+			cout << "Thanks for playing!" << endl;
+			// losing player still loses their bet as they did not win
+			m_players[loserIndex].lose();
+			cout << m_players[loserIndex].getName() << " also loses their bet of $" << m_players[loserIndex].getBet() << "." << endl;
+			cout << endl;
+			cout << "Thanks for playing!" << endl;
+		}
 
 		do{
 			cout << endl << "Play Again? (y/n): ";
