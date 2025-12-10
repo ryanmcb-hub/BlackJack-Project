@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "Hand.h"
+#include "Shoe.h"
 
 #include <vector>
 #include <string>
@@ -9,7 +10,8 @@
 using namespace std;
 class Player {
 protected:
-    Hand m_hand = Hand(); 
+    Hand m_hand = Hand();
+    int m_score = 0;
 
 private:
     double m_balance = 250;
@@ -18,9 +20,13 @@ private:
     void saveBalance();
     void loadBalance(const string& name);
 
+    double m_winnings = 0;
+    double m_losses = 0;
+
 public:
     Player();
     Player(string name);
+    
     virtual ~Player();
 
     double getBalance();
@@ -31,13 +37,25 @@ public:
 
     virtual Hand& getHand();
 
+    int getScore();
+    void setScore(int score);
+    int getPoints();
+
     void printBalance();
     void printName();
 
     bool isBusted();
 
-    void operator+=(double winnings);
-    void operator-=(double bet);
+    double getWinnings();
+    double getLosses();
+
+    void virtual takeTurn(Card dealerUpCard, Shoe* shoe);
+
+    void win(bool blackjack);
+    void lose();
+
+    void operator+=(double amount);
+    void operator-=(double amount);
 };
 
 #endif

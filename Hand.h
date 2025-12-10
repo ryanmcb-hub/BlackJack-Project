@@ -26,6 +26,7 @@ public:
     bool isSoft17();
 
     bool isBlackjack();
+    bool isSoft();
 
     int cardCount();
 

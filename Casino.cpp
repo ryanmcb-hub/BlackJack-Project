@@ -2,12 +2,13 @@
 #include "Game.h"
 #include "Blackjack.h"
 #include "Slots.h"
+#include "PigDice.h"
+#include "BullCow.h"
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <limits>
-#include "pigdice/NewGame.h"
-
 
 using namespace std;
 
@@ -34,19 +35,20 @@ int Casino::gameMenu(){
     {
         cout << "Supported Games Of Horror: " << endl;
         cout << "1. Blackjack Of Blashphamy" << endl;
-        cout << "2. Pigdice of Perdition" << endl; 
-        cout << "3. Slot Machine Of Sadness" << endl;
-        cout << "4. Easy Way Out\n" << endl;
+        cout << "2. Pig Dice Of Purgatory" << endl; 
+        cout << "3. Bull And Cow Of Cowardice" << endl; 
+        cout << "4. Slot Machine Of Sadness" << endl;
+        cout << "5. Easy Way Out\n" << endl;
         cout << "Please select a game: ";
         cin >> selected;
 
-        if (cin.fail() || (selected != 1 && selected != 2 && selected != 3 && selected != 4))
+        if (cin.fail() || (selected != 1 && selected != 2 && selected != 3 && selected != 4 && selected != 5))
         {
-            cout << "Invalid input. Please enter a number between 1 and 4." << endl << endl;
+            cout << "Invalid input. Please enter a number between 1 and 5." << endl << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
-    } while (selected != 1 && selected != 2 && selected != 3 && selected != 4);
+    } while (selected != 1 && selected != 2 && selected != 3 && selected != 4 && selected != 5);
     return selected;
 } 
 
@@ -71,20 +73,24 @@ void Casino::openCasino() {
             activeGame = new Blackjack("Blackjack Table Of Blashphamy");
 
         } else if (selectedGame == 2) {
-            //cout << "Pig Dice of Perdition\n" << endl;
-            activeGame = new NewGame();
+            activeGame = new PigDice("Pig Dice Of Purgatory");
+
         } else if (selectedGame == 3) {
-            activeGame = new Slots("Slot Machine Of Sadness");
+            activeGame = new BullCow("Bull And Cow Of Cowardice");
 
         } else if (selectedGame == 4) {
+            activeGame = new Slots("Slot Machine Of Sadness");
+
+        } else if (selectedGame == 5) {
             displayExit();
             
             break;
         }
 
+        activeGame -> displayRules();
         activeGame -> playGame();
 
-    } while (selectedGame != 3);
+    } while (selectedGame != 5);
 };
 
 
